@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:soundwave/menu.dart';
+import 'package:soundwave/screens/menu.dart';
 
 void main() {
   runApp(const MyApp());
