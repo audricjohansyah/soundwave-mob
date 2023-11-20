@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:soundwave/screens/list_item.dart';
 import 'package:soundwave/screens/menu.dart';
 import 'package:soundwave/screens/album_form.dart';
 
@@ -58,6 +59,17 @@ class LeftDrawer extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) => const ShopFormPage(),
                   ));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.shopping_basket),
+            title: const Text('Daftar Album'),
+            onTap: () {
+              // Route menu ke halaman produk
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ItemPage()),
+              );
             },
           ),
         ],

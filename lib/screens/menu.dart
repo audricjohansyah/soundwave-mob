@@ -10,6 +10,7 @@ class MyHomePage extends StatelessWidget {
     ShopItem("Tambah Album", Icons.add_shopping_cart, Colors.blue),
     ShopItem("Logout", Icons.logout, Colors.green),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
