@@ -5,7 +5,8 @@ import 'package:soundwave/models/Item.dart';
 import 'package:soundwave/widgets/left_drawer.dart';
 
 class ItemPage extends StatefulWidget {
-  const ItemPage({Key? key}) : super(key: key);
+  final int id;
+  const ItemPage({Key? key, required this.id}) : super(key: key);
 
   @override
   _ItemPageState createState() => _ItemPageState();
@@ -13,8 +14,11 @@ class ItemPage extends StatefulWidget {
 
 class _ItemPageState extends State<ItemPage> {
   Future<List<Item>> fetchItem() async {
+    final int id = widget.id;
     // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
-    var url = Uri.parse('https://alexander-audric-tugas.pbp.cs.ui.ac.id./json/');
+    var url =
+        // Uri.parse('https://alexander-audric-tugas.pbp.cs.ui.ac.id./json/');
+        Uri.parse('http://localhost:8000/json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -26,7 +30,7 @@ class _ItemPageState extends State<ItemPage> {
     // melakukan konversi data json menjadi object Item
     List<Item> list_Item = [];
     for (var d in data) {
-      if (d != null) {
+      if (d != null && d['fields']['user'] == id) {
         list_Item.add(Item.fromJson(d));
       }
     }
@@ -65,13 +69,14 @@ class _ItemPageState extends State<ItemPage> {
 
   @override
   Widget build(BuildContext context) {
+    final int id = widget.id;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Album'),
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
       ),
-      drawer: const LeftDrawer(),
+      drawer: LeftDrawer(id: id),
       body: FutureBuilder(
         future: fetchItem(),
         builder: (context, AsyncSnapshot snapshot) {

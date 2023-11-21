@@ -2,6 +2,7 @@ import 'package:soundwave/screens/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:soundwave/screens/registration.dart';
 
 void main() {
   runApp(const LoginApp());
@@ -39,6 +40,8 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
+        backgroundColor: Colors.indigo,
+        foregroundColor: Colors.white,
       ),
       body: Container(
         padding: const EdgeInsets.all(16.0),
@@ -68,9 +71,9 @@ class _LoginPageState extends State<LoginPage> {
                 // Cek kredensial
                 // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                 // Untuk menyambungkan Android emulator dengan Django pada localhost,
-                // gunakan URL http://10.0.2.2/
+                // gunakan URL http://10.0.2.2/ // http://localhost:8000/
                 final response =
-                    await request.login("https://alexander-audric-tugas.pbp.cs.ui.ac.id./auth/login/", {
+                    await request.login("http://localhost:8000/auth/login/", {
                   'username': username,
                   'password': password,
                 });
@@ -78,9 +81,10 @@ class _LoginPageState extends State<LoginPage> {
                 if (request.loggedIn) {
                   String message = response['message'];
                   String uname = response['username'];
+                  int id = response['id'];
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => MyHomePage()),
+                    MaterialPageRoute(builder: (context) => MyHomePage(id: id)),
                   );
                   ScaffoldMessenger.of(context)
                     ..hideCurrentSnackBar()
@@ -105,6 +109,23 @@ class _LoginPageState extends State<LoginPage> {
                 }
               },
               child: const Text('Login'),
+            ),
+            SizedBox(height: 20),
+            Text(
+              "Don't have an account yet?",
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Navigate to registration page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const RegistrationPage()),
+                );
+              },
+              child: const Text('Register'),
             ),
           ],
         ),

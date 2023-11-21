@@ -3,7 +3,8 @@ import 'package:soundwave/widgets/left_drawer.dart';
 import 'package:soundwave/widgets/shop_card.dart';
 
 class MyHomePage extends StatelessWidget {
-  MyHomePage({Key? key}) : super(key: key);
+  final int id;
+  MyHomePage({Key? key, required this.id}) : super(key: key);
 
   final List<ShopItem> items = [
     ShopItem("Lihat Album", Icons.checklist, Colors.red),
@@ -21,7 +22,7 @@ class MyHomePage extends StatelessWidget {
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
       ),
-      drawer: const LeftDrawer(),
+      drawer: LeftDrawer(id: id),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -46,7 +47,7 @@ class MyHomePage extends StatelessWidget {
                 crossAxisCount: 3,
                 shrinkWrap: true,
                 children: items.map((ShopItem item) {
-                  return ShopCard(item);
+                  return ShopCard(item, id);
                 }).toList(),
               ),
             ],
