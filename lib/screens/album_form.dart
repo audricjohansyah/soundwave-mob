@@ -149,13 +149,12 @@ class _ShopFormPageState extends State<ShopFormPage> {
                         // Kirim ke Django dan tunggu respons
                         // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                         final response = await request.postJson(
-                            "http://localhost:8000/create-flutter/",
+                            "https://alexander-audric-tugas.pbp.cs.ui.ac.id./create-flutter/",
                             jsonEncode(<String, String>{
                               'album': _album,
                               'year': _year.toString(),
                               'artist': _artist,
                               'amount': _amount.toString(),
-                              // TODO: Sesuaikan field data sesuai dengan aplikasimu
                             }));
                         if (response['status'] == 'success') {
                           ScaffoldMessenger.of(context)
