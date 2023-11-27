@@ -39,6 +39,7 @@ class _LoginPageState extends State<LoginPage> {
     final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text('Login'),
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
