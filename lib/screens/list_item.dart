@@ -94,12 +94,7 @@ class _ItemPageState extends State<ItemPage> {
                 ],
               );
             } else {
-              return GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 6, // Number of cards in each row
-                  crossAxisSpacing: 4.0, // Horizontal space between cards
-                  mainAxisSpacing: 4.0, // Vertical space between cards
-                ),
+              return ListView.builder(
                 itemCount: snapshot.data.length,
                 itemBuilder: (context, index) {
                   Item item = snapshot.data[index];
@@ -109,11 +104,9 @@ class _ItemPageState extends State<ItemPage> {
                         _showAlbumDetails(context, item);
                       },
                       child: Padding(
-                        padding:
-                            const EdgeInsets.all(2.0), // Adjust the padding
+                        padding: const EdgeInsets.all(16.0),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               "${item.fields.album}",
@@ -123,6 +116,10 @@ class _ItemPageState extends State<ItemPage> {
                               ),
                               textAlign: TextAlign.center,
                             ),
+                            SizedBox(height: 8),
+                            Text("Year: ${item.fields.year}"),
+                            Text("Artist: ${item.fields.artist}"),
+                            Text("Amount: ${item.fields.amount}"),
                           ],
                         ),
                       ),
